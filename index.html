@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevDetective ||</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- The below meta tag informs iOS devices about the icon to use when a user adds the web application to their home screen. -->
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+    <!-- Adding Favicon -->
+    <link rel="icon" href="assets/favicon-32x32.png">
+
+<!-- ==================================
+          site.webmanifest FILE
+    ===================================
+
+The site.webmanifest file and its corresponding <link> tag in HTML are used for configuring web applications, particularly progressive web apps (PWAs). The site.webmanifest file is a JSON file that contains metadata about the web application, such as its name, icons, colors, and display mode.
+
+Here's a breakdown of the properties in below used site.webmanifest file:
+
+name: The name of the web application.
+short_name: A shorter version of the application name, typically used on the device's home screen or app launcher.
+
+icons: An array of icons representing the web application. Each icon object contains the src, sizes, and type properties, specifying the icon image file, its dimensions, and its MIME type.
+
+theme_color: The theme color of the application. This color is used by the browser to customize the UI elements, such as the address bar.
+
+background_color: The background color of the application.
+
+display: Specifies how the web application should be displayed. Possible values include fullscreen, standalone, minimal-ui, and browser.Standalone gives same look as application in a smartphone
+
+The <link> tag with rel="manifest" is used to link the HTML document to the site.webmanifest file. This allows the browser to discover and load the manifest file, enabling features such as adding the web app to the device's home screen, displaying an app-like experience, and customizing the browser UI based on the manifest settings.-->
+<link rel="manifest" href="assets/site.webmanifest">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+    :root {
+    --lm-bg: #f6f8ff;
+    --lm-bg-content: #fefefe;
+    --lm-text: #4b6a9b;
+    --lm-text-alt: #2b3442;
+    --lm-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.2);
+    --lm-shadow-inactive: 0px 16px 30px -10px rgba(0, 0, 0, 0.2);
+    --lm-icon-bg: brightness(100%);
+    /* Btn */
+    --btn: #0079ff;
+    --btn-hover: #60abff;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Space Mono", monospace;
+  }
+    /* Applying filter to bottom-icons class */
+    .bottom-icons{
+
+        filter:var(--lm-icon-bg);
+    }
+    .searchbar-container{
+      /* background-image: url(assets/images/search-icon.svg); */
+      box-shadow: var(--lm-shadow);
+    }
+    .active {
+    box-shadow: var(--lm-shadow);
+  }
+
+  /* styling for autofill property provided by browser */
+  input:-webkit-autofill {
+    
+    -webkit-text-fill-color:rgba(17, 17, 17, 0.301) ;
+}
+.vista{
+    opacity: 1;
+    transform: scale(1);
+     visibility: visible;
+   }
+
+</style>
+</head>
+
+<!-- N-O-T-E:-ACTUAL SIZES ARE SET USING MEDIA QUERIES. -->
+<body class="bg-[--lm-bg] text-[13px] text-[--lm-text] w-[100vw] h-[100vh] relative font-mono ">
+    <!-- Creating Wrapper -->
+  <div class="wrapper  width-[400px] md:w-[580px] xl:w-[730px] absolute top-1/2 left-1/2  translate-x-[-50%] translate-y-[-50%] flex flex-col gap-9">
+        <!-- Creating header which contains a heading on left and an icon & text on right side -->
+    <header class="header  flex justify-between items-center  pt-[6rem]">
+
+            <h1 class="title text-[28px] font-bold leading-6">DevDetective</h1>
+
+            <!-- div for icon and text -->
+        <div class="btn-mode flex justify-between items-center w-[90px] tracking-[2.5px] text-[--lm-text] font-bold hover:cursor-pointer">
+             <p class="mode-text">DARK</p>
+             <div class="icon-container">
+             <img src="assets/images/moon-icon.svg" alt="" class="mode-icon">
+             </div>
+        </div>
+    </header>
+
+       <!-- STARTING MAIN -->
+        <main>
+          <!-- Creating a div which contains every main element of project -->
+          <div class="app w-[100%] flex flex-col gap-4 md:gap-6">
+<!-- Creating an search-container which contains an input search bar,a text showing 'no search results' and a button.It also contains a backgroound image of search icon within it will will be added using css. -->
+            <div class="searchbar-container md:p-[10px] relative bg-[--lm-bg-content] rounded-[15px] shadow-[--lm-shadow] flex h-[100%] p-[6px] justify-between items-center bg-[url('assets/images/search-icon.svg')] bg-no-repeat bg-[24px_center] bg-[length:25px] active">
+
+               <input type="search" name="user-search" id="input" autocomplete="off" class="input-class border-none  outline-none bg-transparent text-[--lm-text] ml-[5px] pl-[50px] md:text-[18px] md-w-[85%] placeholder:tracking-[-0.5px] placeholder:text-[--lm-text] placeholder:text-[13px] md:placeholder:text-[18px] xl:w-[65%] md:placeholder:tracking-[-1.8px] " placeholder="Enter GitHub username.." required>
+
+               <div class="error absolute font-bold right-[10px] md:top-[-25px] text-red-500 md:text-[15px]  xl:-top-[30%] xl:right-0 xl:-translate-y-1/2 xl:text-[15px] ">
+                 <p class="no-results bg-[rgba(217,217,236,0.14)] rounded-[10px] p-1 invisible opacity-0 scale-0 origin-top transition-[opacity_visibility_transform] duration-700 ease-in-out w-auto">No Search Results</p>
+               </div>
+               <button type="submit" class="btn-search  min-w-[84px] p-[12px_16px] bg-[--btn] border-none rounded-[10px] text-white text-[14px] font-bold hover:cursor-pointer hover:bg-[--btn-hover] active:scale-95 transition-colors duration-500 md:p-[14px_18px] md:text-[16px]">Search</button>
+
+            </div> <!--search-bar-container ends-->
+
+
+                <!--Creating a profile container which contains all profile elements  -->
+                <div class="profile-container  bg-[--lm-bg-content] rounded-[15px] shadow-[--lm-shadow] p-[24px] md:p-[40px] xl:relative">
+
+                   
+                 <div class="profile-content flex flex-col gap-6 justify-evenly md:gap-[30px] xl:w-[480px] xl:ml-auto xl:gap-4">
+                     
+                    <!-- Creating a profile header which contains img,a link of github profile and joining date.They all  will be added dynamically  -->
+                    <div class="profile-header flex gap-5 mb-[10px] md:mb-0">
+
+                        <img src="#" alt="" class="avatar w-[70px] rounded-[90px] md:w-[117px] xl:absolute xl:left-0 xl:ml-10">
+ 
+                        <div class="profile-info-wrapper flex justify-between flex-col md:justify-center xl:flex-row xl:justify-between xl:w-[100%]">
+                           <div class="profile-name flex flex-col justify-between">
+                             
+                                       <h2 class="name text-[16px] font-bold text-[--lm-text-alt] md:text-[26px] xl:gap-1"></h2>
+ 
+                            <!-- noopener and noreferrer are two attributes used in HTML anchor (<a>) tags to control how the browser handles links when clicked.
+                        
+                        noopener:
+                        noopener is a security measure that prevents the newly opened page from being able to access the window.opener property and thus the page that opened it. This property could be exploited by malicious websites for various purposes, like redirecting the user or performing actions on the opener page without the user's consent.
+                        When you use noopener, the opened page doesn't have access to the page that opened it, enhancing security by preventing potential malicious activities.When you add noopener to the rel attribute of a link, it tells the browser not to allow the new page to access the window.opener property of the opener page. This property could be exploited by malicious websites for various purposes, like redirecting the user or performing actions on the opener page without the user's consent.
+                        
+                        noreferrer:
+                        noreferrer stands for "no referrer". When a user clicks on a link, the browser sends the URL of the referring page (the page the user was on before clicking the link) in the HTTP request headers to the new page. This can be a privacy concern, as it exposes information about the user's browsing history.
+                        Adding noreferrer to a link prevents the browser from sending the referrer information when the user navigates to the new page, thus enhancing privacy.
+                         -->
+                                                <a href="#" target="_blank" rel="noopener noreferrer" class="user text-[--btn]md-text-[16px]"></a>
+
+                           </div> <!--profile-name ends-->
+                     
+ 
+                                 <p class="date md:text-[15px] xl:pt-3"></p>
+
+                    </div> <!--profile-info-wrapper ends-->
+ 
+                   </div> <!--profile-header ends-->
+ 
+                        <!-- displaying profile biodata -->
+                        <p class="bio leading-6 opacity-75 md:text-[15px]"></p>
+ 
+                          <!-- Wrapper for profile-status -->
+                            <div class="profile-stats-wrapper flex justify-between bg-[--lm-bg] text-center rounded-[10px] p-[18px] w-[90%] mx-auto md:p-[18px_32px] xl:m-[20px_0]">
+ 
+                                 <!-- Repos -->
+                                 <div class="profile-stat flex flex-col w-[100%] gap-2 md:text-start">
+                                    <p class="stat-title text-[11px] md:text-[13px]">Repos</p>
+                                    <p class="stat-value  repos text-[16px] font-bold text-[--lm-text-alt] md:text-[22px]"></p>
+                                 </div>
+ 
+                                  <!-- Followers -->
+                                <div class="profile-stat flex flex-col w-[100%] gap-2 md:text-start">
+                                   <p class="stat-title text-[11px] md:text-[13px]">Followers</p>
+                                   <p class="stat-value followers text-[16px] font-bold text-[--lm-text-alt] md:text-[22px]"></p>
+                                </div> 
+                                  <!-- Following -->
+                                <div class="profile-stat flex flex-col w-[100%] gap-2 md:text-start">
+                                   <p class="stat-title text-[11px] md:text-[13px]">Following</p>
+                                   <p class="stat-value following text-[16px] font-bold text-[--lm-text-alt] md:text-[22px]"></p>
+                                </div>
+ 
+                            </div> <!--profile-stats-wrapper ends-->
+ 
+                            <!-- Wrapper for profile-bottom -->
+                             <div class="profile-bottom-wrapper flex flex-col justify-between gap-[16px_0] md:flex-wrap md:flex-row">
+ 
+                                   <!-- LOCATION -->
+                                 <div class="profile-info w-[50%] gap-[14px] flex  justify-center items-center md:w-[47.5%] md:text-[15px] ">
+                                    <div class="bottom-icons ">
+                                       <img src="assets/images/location-icon.svg" alt="" class="w-[20px]">
+                                    </div>
+                                    <p class="location break-words "></p>
+                                </div>
+ 
+                                 <!-- WEBSITE -->
+                                 <div class="profile-info  w-[50%] flex gap-[14px] justify-center items-center md:w-[47.5%] md:text-[15px]">
+                                    <div class="bottom-icons  ">
+                                         <img src="assets/images/website-icon.svg" alt="" class="md:w-[20px]">
+                                    </div>
+                                    <a href="#" class="page text-[--lm-text] break-all "></a>
+                                 </div>
+ 
+                                  <!-- TWITTER -->
+                                 <div class="profile-info  w-[50%] flex flex-row gap-[14px] justify-center items-center  md:text-[15px] md:w-[47.5%]">
+                                    <div class="bottom-icons  w-[20px]">
+                                         <img src="assets/images/twitter-icon.svg" alt="" class="w-[20px] " >
+                                     </div>
+                                     <a href="#" class="twitter text-[--lm-text] break-all "></a>
+                                 </div>
+ 
+                                 <!-- COMPANY -->
+ 
+                                 <div class="profile-info  w-[100%] flex gap-[14px] justify-center items-center  md:text-[15px] md:w-[27.5%]">
+                                    <div class="bottom-icons w-[20px]">
+                                         <img src="assets/images/company-icon.svg" alt="" class="w-[20px]">     
+                                    </div>
+                                    <p class="company text-[--lm-text] break-words "></p>
+                                 </div>
+ 
+ 
+ 
+                             </div> <!--profile-bottom-div ends-->
+ 
+
+
+                 </div>  <!--profile-content ends-->
+
+                </div> <!--profile-container ends-->
+
+                <!-- Creating an ERROR Container -->
+                <div class="error-container">
+                    <h4 class="err-msg text-red-400 font-bold text-[1rem]"></h4>
+
+                </div> <!--Error Container Ends-->
+
+           </div> <!--main body div ends-->
+
+
+
+   <!-- </div> Body main div ends -->
+
+</main>
+
+   
+
+</div> <!--Wrapper Ends-->
+    
+</body>
+
+
+
+<script src="script.js"></script>
+</html>
